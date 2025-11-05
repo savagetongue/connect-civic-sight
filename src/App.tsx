@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import SubmitReport from "./pages/SubmitReport";
 import MyReports from "./pages/MyReports";
 import IncidentDetail from "./pages/IncidentDetail";
+import Explore from "./pages/Explore";
+import AuthorityDashboard from "./pages/AuthorityDashboard";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
               <Route path="/submit-report" element={<RequireAuth><SubmitReport /></RequireAuth>} />
               <Route path="/my-reports" element={<RequireAuth><MyReports /></RequireAuth>} />
               <Route path="/incident/:id" element={<RequireAuth><IncidentDetail /></RequireAuth>} />
+              <Route path="/explore" element={<RequireAuth><Explore /></RequireAuth>} />
+              <Route path="/authority" element={<RequireAuth><AuthorityDashboard /></RequireAuth>} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

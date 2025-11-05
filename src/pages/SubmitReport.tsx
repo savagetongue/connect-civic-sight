@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
+import { LocationPicker } from "@/components/LocationPicker";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -223,38 +224,23 @@ export default function SubmitReport() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
-                <Input
-                  id="location"
-                  value={locationText}
-                  onChange={(e) => setLocationText(e.target.value)}
-                  placeholder="e.g., 123 Main St, City"
+                <Label>Location *</Label>
+                <LocationPicker
+                  onLocationSelect={(location) => {
+                    setLocationText(location.address);
+                    setLocationLat(location.lat.toString());
+                    setLocationLon(location.lng.toString());
+                  }}
+                  defaultLocation={
+                    locationText && locationLat && locationLon
+                      ? {
+                          address: locationText,
+                          lat: parseFloat(locationLat),
+                          lng: parseFloat(locationLon),
+                        }
+                      : undefined
+                  }
                 />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="lat">Latitude</Label>
-                  <Input
-                    id="lat"
-                    type="number"
-                    step="any"
-                    value={locationLat}
-                    onChange={(e) => setLocationLat(e.target.value)}
-                    placeholder="0.0000"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lon">Longitude</Label>
-                  <Input
-                    id="lon"
-                    type="number"
-                    step="any"
-                    value={locationLon}
-                    onChange={(e) => setLocationLon(e.target.value)}
-                    placeholder="0.0000"
-                  />
-                </div>
               </div>
 
               <div className="space-y-2">
