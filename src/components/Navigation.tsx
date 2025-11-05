@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import { useProfile } from "@/hooks/useProfile";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { 
   Home, 
@@ -17,6 +18,7 @@ import { cn } from "@/lib/utils";
 export function Navigation() {
   const { user, signOut } = useAuth();
   const { data: profile } = useProfile();
+  const { data: role } = useUserRole();
   const location = useLocation();
 
   if (!user) return null;
@@ -42,8 +44,8 @@ export function Navigation() {
   ];
 
   const getLinks = () => {
-    if (profile?.role === "admin") return adminLinks;
-    if (profile?.role === "authority") return authorityLinks;
+    if (role === "admin") return adminLinks;
+    if (role === "authority") return authorityLinks;
     return citizenLinks;
   };
 

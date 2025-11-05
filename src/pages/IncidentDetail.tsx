@@ -10,6 +10,8 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { PriorityBadge } from "@/components/PriorityBadge";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { CommentSection } from "@/components/CommentSection";
+import { AuthorityResponse } from "@/components/AuthorityResponse";
 import { useEffect, useState } from "react";
 
 export default function IncidentDetail() {
@@ -280,6 +282,9 @@ export default function IncidentDetail() {
               )}
             </CardContent>
           </Card>
+
+          <AuthorityResponse incidentId={id!} />
+          <CommentSection incidentId={id!} />
         </div>
       </main>
     </div>

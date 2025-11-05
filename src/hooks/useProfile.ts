@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { Profile } from "@/lib/types";
+import { Database } from "@/integrations/supabase/types";
 
 export function useProfile() {
   const { user } = useAuth();
@@ -18,7 +18,7 @@ export function useProfile() {
         .maybeSingle();
 
       if (error) throw error;
-      return data as Profile | null;
+      return data as Database["public"]["Tables"]["profiles"]["Row"] | null;
     },
     enabled: !!user,
   });
